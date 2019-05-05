@@ -1,0 +1,109 @@
+- id: Onkyo_Volume_Slider_Set
+  alias: Onkyo Volume Slider Set
+  trigger:
+  - entity_id: input_number.onkyo_volume
+    platform: state
+  condition:
+  - condition: state
+    entity_id: media_player.receiver
+    state: 'on'
+  action:
+  - data_template:
+      entity_id: media_player.receiver
+      volume_level: '{{ (states.input_number.onkyo_volume.state | float / 100) | round(2)
+        }}'
+    service: media_player.volume_set
+- id: Onkyo_Volume_Slider_Get
+  alias: Onkyo Volume Slider Get
+  trigger:
+  - entity_id: media_player.receiver
+    platform: state
+  - entity_id: media_player.receiver
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: media_player.receiver
+    from: 'on'
+    platform: state
+    to: 'off'
+  action:
+    service: input_number.set_value
+    data_template:
+      entity_id: input_number.onkyo_volume
+      value: '{{ (states.media_player.receiver.attributes.volume_level | float * 100)
+        | round(2)}}'
+- id: Samsung_Volume_Slider_Set
+  alias: Samsung Volume Slider Set
+  trigger:
+  - entity_id: input_number.samsung_volume
+    platform: state
+  condition:
+  - condition: state
+    entity_id: media_player.receiver
+    state: 'on'
+  action:
+  - data_template:
+      entity_id: media_player.receiver
+      volume_level: '{{ (states.input_number.samsung_volume.state | float / 100) |
+        round(2) }}'
+    service: media_player.volume_set
+- id: Samsung_Volume_Slider_Get
+  alias: Samsung Volume Slider Get
+  trigger:
+  - entity_id: media_player.receiver
+    platform: state
+  - entity_id: media_player.receiver
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: media_player.receiver
+    from: 'on'
+    platform: state
+    to: 'off'
+  action:
+    service: input_number.set_value
+    data_template:
+      entity_id: input_number.samsung_volume
+      value: '{{ (states.media_player.receiver.attributes.volume_level | float * 100)
+        | round(2)}}'
+- id: Set_theme_at_startup
+  alias: Set theme at startup
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: BlueNight
+- id: '1551240774576'
+  alias: Close Blinds
+  trigger:
+  - at: '19:00'
+    platform: time
+  condition: []
+  action:
+  - service: cover.close_cover
+- id: '1555526401491'
+  alias: Kids Wake Up
+  trigger:
+  - at: 06:00:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - service: script.kids_lights_on
+  - delay: 00:02:00
+  - service: script.kids_time_to_get_up_announce
+- id: '1555852504311'
+  alias: Turn Things Off When Away Daytime
+  trigger:
+  - at: 09:25:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'Off'
+  action:
+  - service: script.turn_things_off_when_away_daytime

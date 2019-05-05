@@ -1,0 +1,267 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  # Customization file
+  customize: !include customize.yaml
+  customize_domain:
+    switch:
+      icon: mdi:lightbulb
+  auth_providers:
+   - type: homeassistant
+  # - type: legacy_api_password
+  #   api_password: !secret api_password
+   - type: trusted_networks
+     trusted_networks:
+       - 192.168.1.0/24
+
+http:
+  #base_url: controlme.duckdns.org:8123
+  #trusted_networks:
+  #  - 192.168.1.0/24
+  #api_password: !secret api_password
+
+ios:
+
+# Enables the frontend
+frontend:
+  themes: !include themes.yaml
+
+# Enables configuration UIS
+config:
+system_health:
+
+zwave:
+  usb_path: /dev/ttyACM0
+  debug: true
+  network_key: "0x38, 0x65, 0x49, 0x06, 0xFC, 0x72, 0xBA, 0x85, 0xEA, 0xB2, 0x8D, 0x0C, 0x95, 0xB6, 0xE9, 0xC0"
+
+
+custom_updater:   # https://github.com/custom-components/custom_updater/wiki/Installation
+  track:
+    - components
+    - cards
+    - python_scripts
+#  card_urls:
+#    - https://raw.githubusercontent.com/bramkragten/custom-ui/master/updater.json
+#    - https://github.com/custom-cards/button-card/blob/master/package.json
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+cloud:
+
+homekit:
+#  entity_config:
+#    alarm_control_panel.alarm_system:
+#      code: 3535
+
+konnected:
+  access_token: !secret konnected_token
+  devices:
+    - id: 84f3eb1b3ded
+      binary_sensors:
+        - zone: 1
+          type: door
+          name: 'konnected 1'
+        - zone: 2
+          type: smoke
+          name: 'konnected 2'
+          inverse: true
+        - zone: 3
+          type: window
+          name: 'konnected 3'
+        - zone: 4
+          type: motion
+          name: 'konnected 4'
+        - zone: 5
+          type: motion
+          name: 'konnected 5'
+        - zone: 6
+          type: motion
+          name: 'konnected 6'
+    - id: 84f3eb1b4801
+      binary_sensors:
+        - zone: 1
+          type: door
+          name: 'konnected 7'
+        - zone: 2
+          type: smoke
+          name: 'konnected 8'
+          inverse: true
+        - zone: 3
+          type: window
+          name: 'konnected 9'
+        - zone: 4
+          type: motion
+          name: 'konnected 10'
+        - zone: 5
+          type: motion
+          name: 'konnected 11'
+        - zone: 6
+          type: motion
+          name: 'konnected 12'
+
+
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: 3535
+    pending_time: 30
+    delay_time: 20
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0
+
+lutron_caseta:
+  host: 192.168.1.203
+  keyfile: /ssl/lutron/caseta.key
+  certfile: /ssl/lutron/caseta.crt
+  ca_certs: /ssl/lutron/caseta-bridge.crt
+
+ring:
+  username: !secret ringusername
+  password: !secret ringpassword
+
+ecobee:
+  api_key: !secret ecobee_api_key
+
+climate:
+  platform: ecobee
+
+remote:
+  - platform: itach
+    host: 192.168.1.6
+    devices:
+      - name: TV
+        modaddr: 5
+        connaddr: 1
+        commands:
+          - name: "Power"
+            data: "0000 006C 0000 0022 00AB 00AB 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0016 0016 0040 0016 0040 0016 0040 0016 0040 0016 0040 0016 0040 0016 0700"
+          - name: "ON"
+            data: "0000 006C 0000 0022 00AB 00AB 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0016 0016 0016 0016 0040 0016 0040 0016 0016 0016 0016 0016 0040 0016 0016 0016 0040 0016 0040 0016 0016 0016 0016 0016 0040 0016 0040 0016 0016 0016 0700"
+          - name: "OFF"
+            data: "0000 006C 0000 0022 00AB 00AB 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0040 0016 0040 0016 0016 0016 0700"
+          - name: "HDMI 1"
+            data: "0000 006C 0000 0022 00AB 00AB 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0016 0016 0016 0016 0040 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0040 0016 0040 0016 0016 0016 0040 0016 0016 0016 0016 0016 0016 0016 0700"
+          - name: "HDMI 3"
+            data: "0000 006C 0000 0022 00AB 00AB 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0016 0016 0016 0016 0016 0016 0016 0016 0040 0016 0040 0016 0040 0016 0016 0016 0040 0016 0040 0016 0040 0016 0040 0016 0016 0016 0016 0016 0700"
+
+input_number:
+  onkyo_volume:
+    name: Onkyo Volume
+    initial: 50
+    min: 0
+    max: 100
+    step: 1
+  samsung_volume:
+    name: Samsung Volume
+    initial: 50
+    min: 0
+    max: 100
+    step: 1
+
+mqtt:
+ broker: 192.168.1.5
+ port: 1883
+ client_id: home-assistant-1
+ keepalive: 60
+ username: !secret mqttusername
+ password: !secret mqttpassword
+
+light:
+  - platform: flux_led
+    devices:
+      192.168.1.196:
+        name: awning
+
+ffmpeg:
+
+camera:
+  - platform: ring
+
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.10-10
+
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: !secret mqttpassword
+  max_retries: 3
+  default_measurement: state
+    
+
+#switch:
+#  - platform: command_line
+#    name: Twinkly1
+#    switches:
+#      twinkly1:
+#        command_on: "python3 /config/python_scripts/twinkly.py 192.168.1.199 on"
+#        command_off: "python3 /config/python_scripts/twinkly.py 192.168.1.199 off" 
+#        command_state: "python3 /config/python_scripts/twinkly.py 192.168.1.199 state"
+#        value_template: "{{ value == \"1\" }}"
+#        friendly_name: Twinkly1
+#  - platform: command_line
+#    name: Twinkly2
+#    switches:
+#      twinkly2:
+#        command_on: "python3 /config/python_scripts/twinkly.py 192.168.1.238 on"
+#        command_off: "python3 /config/python_scripts/twinkly.py 192.168.1.238 off" 
+#        command_state: "python3 /config/python_scripts/twinkly.py 192.168.1.238 state"
+#        value_template: "{{ value == \"1\" }}"
+#        friendly_name: Twinkly2
+
+group: !include_dir_merge_named group
+automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensor
+binary_sensor: !include_dir_merge_list binary_sensor
+media_player: !include_dir_merge_list media_player

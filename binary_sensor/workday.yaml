@@ -1,0 +1,7 @@
+- platform: workday
+  country: US
+  workdays: [mon, tue, wed, thu, fri]
+  excludes: [sat, sun, holiday]
+  add_holidays: 
+    - '2018-12-26'
+    - '2018-12-31'

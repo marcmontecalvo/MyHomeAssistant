@@ -1,0 +1,51 @@
+#default_view:
+ #   view: yes
+  #  icon: mdi:home
+   # entities:
+    #    - group.all_lights
+     #   - group.HA
+      #  - group.Shades        
+
+media_view:
+    name: Media
+    icon: mdi:television
+    view: yes
+    entities:
+        - group.livingroom_media
+        - group.playroom_media
+
+security:
+    name: Security
+    icon: mdi:security
+    view: yes
+    entities:
+        - group.Alarm_sensors
+        - group.Motion_sensors
+        - group.Ring_last_activity
+        - group.Ring_Signal
+        - group.locks
+        - group.Aeotec_TriSensor
+
+light_view:
+    view: yes
+    name: Lights
+    icon: mdi:lightbulb
+    entities:
+        - group.Living_Room_lights
+        - group.Dining_Room_lights
+        - group.kitchen_lights
+        - group.bedroom_lights
+        - group.Foyer_lights
+        - group.Office_lights
+        - group.Upstairs_lights
+        - group.Outdoor_Front_Lights
+        - group.tree_lights
+
+camera_view:
+    name: Live Cameras
+    icon: mdi:camcorder
+    view: yes
+    entities:
+        - camera.front_door
+        - camera.front_floodlight
+        - camera.backyard

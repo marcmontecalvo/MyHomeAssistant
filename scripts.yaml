@@ -1,0 +1,92 @@
+switch_to_roku:
+  alias: Watch Living Room Roku
+  sequence:
+  - data:
+      entity_id: media_player.receiver
+    service: media_player.turn_on
+  - data:
+      entity_id: remote.tv
+    service: remote.turn_on
+  - data:
+      command: HDMI 1
+      entity_id: remote.tv
+    service: remote.send_command
+  - data:
+      entity_id: media_player.receiver
+      source: Bluray
+    service: media_player.select_source
+switch_to_playstation:
+  alias: Use Playstation in Living Room
+  sequence:
+  - data:
+      entity_id: remote.tv
+    service: remote.turn_on
+  - data:
+      entity_id: media_player.receiver
+    service: media_player.turn_off
+  - data:
+      command: HDMI 3
+      entity_id: remote.tv
+    service: remote.send_command
+tv_off:
+  alias: Turn off the living room TV
+  sequence:
+  - data:
+      entity_id: media_player.receiver
+    service: media_player.turn_off
+  - data:
+      entity_id: remote.tv
+    service: remote.turn_off
+kids_lights_on:
+  alias: Kids Lights On
+  sequence:
+  - data:
+      entity_id: switch.annabella_main_switch
+    service: switch.turn_on
+  - data:
+      entity_id: switch.vincenzo_main_switch
+    service: switch.turn_on
+  - data:
+      entity_id: switch.mia_main_switch
+    service: switch.turn_on
+kids_mini_volume_50:
+  alias: Kids Mini's to 50%
+  sequence:
+  - data:
+      entity_id: media_player.annabellas_room_speaker
+      volume_level: '.5'
+    service: media_player.volume_set
+  - data:
+      entity_id: media_player.vincenzos_mini
+      volume_level: '.5'
+    service: media_player.volume_set
+  - data:
+      entity_id: media_player.mias_mini
+      volume_level: '.5'
+    service: media_player.volume_set
+kids_time_to_get_up_announce:
+  alias: kids get up announce
+  sequence:
+  - data:
+      entity_id: media_player.mias_mini
+      message: Time to wake up Mia.
+    service: tts.google_say
+  - data:
+      entity_id: media_player.vincenzos_mini
+      message: Time to wake up Vincenzo.  Go potty and get dressed.
+    service: tts.google_say
+  - data:
+      entity_id: media_player.annabellas_room_speaker
+      message: Time to wake up Annabella.  Go potty and get dressed.
+    service: tts.google_say
+turn_things_off_when_away_daytime:
+  alias: Turn Things Off When Away Daytime
+  sequence:
+  - data_template:
+      entity_id: '{% set domains = [''light'',''switch'',''fan'',''media_player'']
+        %} {% set on_states = [''on''] %} {{ states | selectattr(''domain'',''in'',
+        domains) | selectattr(''state'',''in'',on_states) | map(attribute=''entity_id'')
+        | join('', '') }}
+
+        '
+    service: homeassistant.turn_off

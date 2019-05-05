@@ -1,0 +1,10 @@
+Shades:
+  name: Shades
+  control: hidden
+  entities:
+    - scene.open
+    - scene.close
+    - cover.living_room_left2
+    - cover.living_room_middle
+    - cover.living_room_right2
+

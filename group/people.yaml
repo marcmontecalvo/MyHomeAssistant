@@ -1,0 +1,6 @@
+Family:
+  control: hidden
+  entities:
+    - device_tracker.marc
+    - device_tracker.lisa
+    - device_tracker.mia

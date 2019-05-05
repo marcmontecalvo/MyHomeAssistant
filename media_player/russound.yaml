@@ -1,0 +1,21 @@
+media_player:
+  - platform: russound_rnet
+    host: 127.0.0.1
+    port: 6271
+    name: Russound
+    zones:
+      1:
+        name: Main Bedroom
+      2:
+        name: Living Room
+      3:
+        name: Kitchen
+      4:
+        name: Bathroom
+      5:
+        name: Dining Room
+      6:
+        name: Guest Bedroom
+    sources:
+      - name: Sonos
+      - name: Sky+

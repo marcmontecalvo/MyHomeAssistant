@@ -1,0 +1,12 @@
+HA:
+  name: Hassio Stuff
+  control: hidden
+  entities:
+    - sensor.time
+    - sensor.date
+    - sun.sun
+    - sensor.external_ip
+    - sensor.ha_installed_version
+    - sensor.ha_uptime
+    - sensor.since_last_boot_templated
+

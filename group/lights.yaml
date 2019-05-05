@@ -1,0 +1,82 @@
+#Tree_lights:
+#  name: Tree lights
+#  entities:
+#    - switch.twinkly1
+#    - switch.twinkly2
+
+kitchen lights:
+  entities:
+    - switch.kitchen_main_light
+    - switch.kitchen_top_light
+    - switch.kitchen_bar_rope_light
+    - light.kitchen_bar_pendant_lights
+    - light.kitchen_table_light
+
+Living_Room_lights:
+  name: Living Room lights
+  entities:
+    - switch.living_room
+
+Dining_Room_lights:
+  name: Dining Room lights
+  entities:
+    - light.dining_room_lights
+
+Foyer_lights:
+  name: Foyer lights
+  entities:
+    - light.entryway_light
+
+Office_lights:
+  name: Office lights
+  entities:
+    - switch.office_light
+
+Upstairs_lights:
+  name: Upstairs lights
+  entities:
+    - switch.upstairs_main_light
+    - switch.upstairs_bathroom_light
+
+Outdoor_Front_Lights:
+  name: Outdoor Front Lights
+  entities:
+    - switch.front_door
+    - light.outdoor_sconce
+    - light.led_awning
+
+bedroom_lights:
+  name: Bedroom Lights
+  entities:
+    - switch.vincenzo_main_switch
+    - switch.annabella_main_switch
+    - switch.mia_main_switch
+    - switch.master_bedroom
+
+all_lights:
+  name: All Lights
+  entities:
+    - switch.kitchen_main
+    - switch.kitchen_top_lights
+    - switch.kitchen_bar_rope_light
+    - light.kitchen_bar_pendants
+    - light.kitchen_table_light
+    - switch.living_room
+    - light.dining_room_lights
+    - light.entryway_light
+    - switch.office_light
+    - switch.upstairs_main_light
+    - switch.upstairs_bathroom_light
+    - switch.front_door
+    - light.outdoor_sconce
+    - light.led_awning
+    - switch.vincenzo_main_switch
+    - switch.annabella_main_switch
+    - switch.mia_main_switch
+    - switch.master_bedroom
+
+test_lights:
+  name: Test Lights
+  entities:
+    - group.all_lights
+    - group.all_switches

@@ -1,0 +1,6 @@
+- platform: ring
+  monitored_conditions:
+    - wifi_signal_category
+    - last_activity
+    - last_motion
+    - last_ding

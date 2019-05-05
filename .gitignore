@@ -1,0 +1,22 @@
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+.vs
+.ios.conf
+.uuid
+.ring_cache.pickle
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+ecobee.conf
+OZW_Log.txt
+core
+home-assistant_v2.db
