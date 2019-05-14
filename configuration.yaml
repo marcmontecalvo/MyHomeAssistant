@@ -11,9 +11,14 @@ homeassistant:
   time_zone: America/New_York
   # Customization file
   customize: !include customize.yaml
-  customize_domain:
-    switch:
+  customize_glob:
+    "light.*light":
       icon: mdi:lightbulb
+    "switch.*light":
+      icon: mdi:lightbulb
+ # customize_domain:
+  #  switch:
+  #    icon: mdi:lightbulb
   auth_providers:
    - type: homeassistant
   # - type: legacy_api_password
@@ -23,12 +28,16 @@ homeassistant:
        - 192.168.1.0/24
 
 http:
-  #base_url: controlme.duckdns.org:8123
+  #base_url: http://tampabaybrew.com
+  #use_x_forwarded_for: true
+  #trusted_proxies: 192.168.1.150
   #trusted_networks:
   #  - 192.168.1.0/24
   #api_password: !secret api_password
 
 ios:
+
+python_script:
 
 # Enables the frontend
 frontend:
@@ -195,12 +204,6 @@ remote:
 input_number:
   onkyo_volume:
     name: Onkyo Volume
-    initial: 50
-    min: 0
-    max: 100
-    step: 1
-  samsung_volume:
-    name: Samsung Volume
     initial: 50
     min: 0
     max: 100

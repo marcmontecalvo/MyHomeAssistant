@@ -82,11 +82,5 @@ kids_time_to_get_up_announce:
 turn_things_off_when_away_daytime:
   alias: Turn Things Off When Away Daytime
   sequence:
-  - data_template:
-      entity_id: '{% set domains = [''light'',''switch'',''fan'',''media_player'']
-        %} {% set on_states = [''on''] %} {{ states | selectattr(''domain'',''in'',
-        domains) | selectattr(''state'',''in'',on_states) | map(attribute=''entity_id'')
-        | join('', '') }}
-
-        '
-    service: homeassistant.turn_off
+  - data: {}
+    service: python_script.lights_off
